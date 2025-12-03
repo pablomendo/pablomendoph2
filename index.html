@@ -49,7 +49,7 @@
         .gallery-item {
             overflow: hidden;
             border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
             cursor: pointer;
         }
         .gallery-item img {
@@ -156,37 +156,39 @@
             <h2 class="text-4xl font-bold text-center mb-4">Nuestra <span class="text-primary-ph">Galería</span></h2>
             <p class="text-center text-xl text-gray-600 mb-12">El arte de capturar el sabor. Haz click en cualquier imagen para verla en detalle.</p>
 
-            <!-- Grid de Galería - ORDEN ESTRICTO DE LA CAPTURA DE PANTALLA DEL USUARIO (CON NOMBRES DE ARCHIVO DESCRIPTIVOS/SEO) -->
+            <!-- Grid de Galería - ORDENADO POR COLOR: ROJO, VERDE, VIOLETA, NARANJA/AMARILLO -->
             <div id="photo-gallery" class="gallery-grid">
                 
-                <!-- FILA 1 -->
+                <!-- GRUPO 1: ROJO (Packs de Carnes/Embutidos) -->
+                <!-- 1. quesos_pack.jpg (Horizontal, ocupa 2 espacios para mantener el diseño) -->
+                <div class="gallery-item md:col-span-2" data-src="quesos_pack.jpg"><img src="quesos_pack.jpg" alt="Pack de quesos en primer plano."></div>
+                <div class="gallery-item" data-src="fiambres_mesa.jpg"><img src="https://placehold.co/800x600/1a202c/ffffff?text=FIAMBRES_MESA" alt="Mesa de fiambres"></div>
+                <div class="gallery-item" data-src="bacon_pack.jpg"><img src="https://placehold.co/800x600/1a202c/ffffff?text=BACON_PACK" alt="Pack de bacon"></div>
+                <div class="gallery-item" data-src="jamon_pack.jpg"><img src="jamon_pack.jpg" alt="Pack de jamón"></div>
+
+                <!-- GRUPO 2: VERDE (Varios/Estudio) -->
                 <div class="gallery-item" data-src="empanada_corte.jpg"><img src="https://placehold.co/800x600/38a169/ffffff?text=EMPANADA" alt="Empanada en primer plano"></div>
+                <div class="gallery-item" data-src="Sesion-de-estudio-004.jpg"><img src="https://placehold.co/800x600/38a169/ffffff?text=ESTUDIO_004" alt="Foto de estudio 004"></div>
                 <div class="gallery-item" data-src="Sesion-Cheka-Editar.jpg"><img src="https://placehold.co/800x600/38a169/ffffff?text=SESION_EDITAR" alt="Foto de sesión de Cheka"></div>
                 <div class="gallery-item" data-src="Sesion-Cheka-043.jpg"><img src="https://placehold.co/800x600/38a169/ffffff?text=CHEKA_043" alt="Foto de sesión de Cheka 043"></div>
-                <div class="gallery-item" data-src="Sesion-de-estudio-004.jpg"><img src="https://placehold.co/800x600/38a169/ffffff?text=ESTUDIO_004" alt="Foto de estudio 004"></div>
                 
-                <!-- FILA 2 -->
-                <div class="gallery-item" data-src="bacon_pack.jpg"><img src="https://placehold.co/800x600/1a202c/ffffff?text=BACON_PACK" alt="Pack de bacon"></div>
-                <div class="gallery-item" data-src="fiambres_mesa.jpg"><img src="https://placehold.co/800x600/1a202c/ffffff?text=FIAMBRES_MESA" alt="Mesa de fiambres"></div>
-                <!-- 7. quesos_pack.jpg (Horizontal, ocupa 2 espacios para mantener el diseño) -->
-                <div class="gallery-item md:col-span-2" data-src="quesos_pack.jpg"><img src="quesos_pack.jpg" alt="Pack de quesos en primer plano."></div>
-
-                <!-- FILA 3 (Ajustada a la cuadrícula) -->
-                <div class="gallery-item" data-src="jamon_pack.jpg"><img src="jamon_pack.jpg" alt="Pack de jamón"></div>
+                <!-- Placeholder que tiene color verde en la captura -->
                 <div class="gallery-item" data-src="DSC_4631.jpg"><img src="https://placehold.co/800x600/1a202c/ffffff?text=DSC_4631" alt="Foto DSC 4631"></div>
+                
+                <!-- GRUPO 3: VIOLETA (Sushi Producto Final/Acción) -->
+                <div class="gallery-item" data-src="sushi-aguacate-palta.jpg"><img src="DSC_4746.jpg" alt="Cuatro piezas de sushi con cobertura de palta"></div>
                 <div class="gallery-item" data-src="corte-rollo-sushi.jpg"><img src="DSC_4744.jpg" alt="Corte preciso de un rollo de sushi"></div>
                 <div class="gallery-item" data-src="servido-sushi-en-pizarra.jpg"><img src="DSC_4750.jpg" alt="Mano de chef sirviendo sushi"></div>
-
-                <!-- FILA 4 -->
-                <div class="gallery-item" data-src="sushi-aguacate-palta.jpg"><img src="DSC_4746.jpg" alt="Cuatro piezas de sushi con cobertura de palta"></div>
+                
+                <!-- GRUPO 4: NARANJA/AMARILLO (Sushi Proceso/Detalle) -->
                 <div class="gallery-item" data-src="sushi-gourmet-flotante.jpg"><img src="DSC_4793.jpg" alt="Sushi de palta y crema levantado con palillos"></div>
                 <div class="gallery-item" data-src="sushi-rolls-cebolla-frita.jpg"><img src="DSC_4806.jpg" alt="Rollos de sushi gourmet con cebolla frita"></div>
                 <div class="gallery-item" data-src="preparacion-sushi-mango.jpg"><img src="DSC_4723.jpg" alt="Chef colocando mango en un rollo de sushi"></div>
-
-                <!-- FILA 5 -->
                 <div class="gallery-item" data-src="chef-espolvoreando-toppings.jpg"><img src="DSC_4662.jpg" alt="Espolvoreando toppings verdes"></div>
                 <div class="gallery-item" data-src="primer-plano-champiñones.jpg"><img src="DSC_4709.jpg" alt="Primer plano de champiñones"></div>
-                <div class="gallery-item" data-src="corte-aguacate-cocina.jpg"><img src="DSC_4674.jpg" alt="Corte de aguacate en primer plano"></div>
+                
+                <!-- Fotos restantes sin color definido, se añaden al final -->
+                <div class="gallery-item" data-src="DSC_4674.jpg"><img src="DSC_4674.jpg" alt="Corte de aguacate en primer plano"></div>
                 <div class="gallery-item" data-src="cocina_sushi.jpg"><img src="cocina_sushi.jpg" alt="Proceso de armado de sushi en cocina"></div>
                 
             </div>
