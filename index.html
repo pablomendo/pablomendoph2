@@ -42,16 +42,39 @@
         }
         /* Galería de cuadrícula dinámica con efecto hover/zoom */
         .gallery-grid {
+            /* Usamos 4 columnas base para que 4 elementos quepan en una fila */
             display: grid;
             gap: 1.5rem; /* Gap de 6 en Tailwind */
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 columnas explícitas */
         }
+        /* En móvil, ajustamos a 2 columnas para que no se vea tan pequeño */
+        @media (max-width: 768px) {
+             .gallery-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columnas en móvil */
+            }
+            .gallery-item-full {
+                grid-column: span 2 / span 2; /* Ocupa las 2 columnas en móvil */
+            }
+        }
+
         .gallery-item {
             overflow: hidden;
             border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
             cursor: pointer;
+            /* Aseguramos que los elementos no ocupen más de 1 columna por defecto en desktop */
+            grid-column: span 1 / span 1; 
         }
+        /* Esta clase asegura que un elemento ocupe 1 columna en móvil y 1 en desktop para esta fila de 4 */
+        .gallery-item-quarter {
+            grid-column: span 2 / span 2; /* 2 columnas en móvil */
+        }
+        @media (min-width: 768px) {
+            .gallery-item-quarter {
+                grid-column: span 1 / span 1; /* 1 columna en desktop */
+            }
+        }
+        
         .gallery-item img {
             width: 100%;
             height: 100%;
@@ -154,41 +177,36 @@
     <section id="galeria" class="py-20 md:py-28 bg-secondary-color">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold text-center mb-4">Nuestra <span class="text-primary-ph">Galería</span></h2>
-            <p class="text-center text-xl text-gray-600 mb-12">El arte de capturar el sabor. Haz click en cualquier imagen para verla en detalle.</p>
+            <p class="text-center text-xl text-gray-600 mb-12">El arte de capturar el sabor.</p>
 
-            <!-- Grid de Galería - ORDENADO POR COLOR: ROJO, VERDE, VIOLETA, NARANJA/AMARILLO -->
+            <!-- Grid de Galería -->
             <div id="photo-gallery" class="gallery-grid">
                 
-                <!-- GRUPO 1: ROJO (Packs de Carnes/Embutidos) -->
-                <!-- 1. quesos_pack.jpg (Horizontal, ocupa 2 espacios para mantener el diseño) -->
-                <div class="gallery-item md:col-span-2" data-src="quesos_pack.jpg"><img src="quesos_pack.jpg" alt="Pack de quesos en primer plano."></div>
-                <div class="gallery-item" data-src="fiambres_mesa.jpg"><img src="fiambres_mesa.jpg" alt="Mesa de fiambres"></div>
-                <div class="gallery-item" data-src="bacon_pack.jpg"><img src="bacon_pack.jpg" alt="Pack de bacon"></div>
-                <div class="gallery-item" data-src="jamon_pack.jpg"><img src="jamon_pack.jpg" alt="Pack de jamón"></div>
+                <!-- FILA 1: 4 Fotos Horizontales (ROJO) -->
+                <div class="gallery-item gallery-item-quarter" data-src="quesos_pack.jpg"><img src="quesos_pack.jpg" alt="Pack de quesos en primer plano."></div>
+                <div class="gallery-item gallery-item-quarter" data-src="fiambres_mesa.jpg"><img src="fiambres_mesa.jpg" alt="Mesa de fiambres"></div>
+                <div class="gallery-item gallery-item-quarter" data-src="bacon_pack.jpg"><img src="bacon_pack.jpg" alt="Pack de bacon"></div>
+                <div class="gallery-item gallery-item-quarter" data-src="jamon_pack.jpg"><img src="jamon_pack.jpg" alt="Pack de jamón"></div>
 
-                <!-- GRUPO 2: VERDE (Varios/Estudio) -->
-                <div class="gallery-item" data-src="empanada_corte.jpg"><img src="empanada_corte.jpg" alt="Empanada en primer plano"></div>
-                <div class="gallery-item" data-src="Sesion-de-estudio-004.jpg"><img src="Sesion-de-estudio-004.jpg" alt="Foto de estudio 004"></div>
-                <div class="gallery-item" data-src="Sesion-Cheka-Editar.jpg"><img src="Sesion-Cheka-Editar.jpg" alt="Foto de sesión de Cheka"></div>
-                <div class="gallery-item" data-src="Sesion-Cheka-043.jpg"><img src="Sesion-Cheka-043.jpg" alt="Foto de sesión de Cheka 043"></div>
+                <!-- FILA 2: 4 Fotos Horizontales (VIOLETA/SUSHI) -->
+                <div class="gallery-item gallery-item-quarter" data-src="corte-rollo-sushi.jpg"><img src="corte-rollo-sushi.jpg" alt="Corte rollo de sushi"></div>
+                <div class="gallery-item gallery-item-quarter" data-src="preparado-roll-sushi.jpg"><img src="preparado-roll-sushi.jpg" alt="Rollo de sushi recién preparado"></div>
+                <div class="gallery-item gallery-item-quarter" data-src="servido-sushi-en-pizarra.jpg"><img src="servido-sushi-en-pizarra.jpg" alt="Sushi servido en pizarra"></div>
+                <div class="gallery-item gallery-item-quarter" data-src="sushi-aguacate-palta.jpg"><img src="sushi-aguacate-palta.jpg" alt="Sushi con aguacate y palta"></div>
+
+                <!-- FILA 3: 4 Fotos Horizontales (AMARILLO/PROCESO Y DETALLE) -->
+                <div class="gallery-item gallery-item-quarter" data-src="chef-espolvoreando-toppings.jpg"><img src="chef-espolvoreando-toppings.jpg" alt="Chef espolvoreando toppings"></div>
+                <div class="gallery-item gallery-item-quarter" data-src="preparacion-sushi-mango.jpg"><img src="preparacion-sushi-mango.jpg" alt="Preparación de sushi con mango"></div>
+                <div class="gallery-item gallery-item-quarter" data-src="primer-plano-champiñones.jpg"><img src="primer-plano-champiñones.jpg" alt="Primer plano de champiñones"></div>
+                <div class="gallery-item gallery-item-quarter" data-src="sushi-gourmet-flotante.jpg"><img src="sushi-gourmet-flotante.jpg" alt="Sushi gourmet flotante"></div>
+
+                <!-- FILA 4: 4 Fotos Horizontales (VERDE/ESTUDIO Y VARIOS) -->
+                <div class="gallery-item gallery-item-quarter" data-src="DSC_4631.jpg"><img src="DSC_4631.jpg" alt="Foto de producto verde"></div>
+                <div class="gallery-item gallery-item-quarter" data-src="DSC_4674.jpg"><img src="DSC_4674.jpg" alt="Corte de aguacate"></div>
+                <div class="gallery-item gallery-item-quarter" data-src="DSC_4709.jpg"><img src="DSC_4709.jpg" alt="Primer plano de ingredientes"></div>
+                <div class="gallery-item gallery-item-quarter" data-src="DSC_4806.jpg"><img src="DSC_4806.jpg" alt="Rollos de sushi final"></div>
                 
-                <div class="gallery-item" data-src="DSC_4631.jpg"><img src="DSC_4631.jpg" alt="Foto DSC 4631"></div>
-                
-                <!-- GRUPO 3: VIOLETA (Sushi Producto Final/Acción) -->
-                <div class="gallery-item" data-src="DSC_4746.jpg"><img src="DSC_4746.jpg" alt="Cuatro piezas de sushi con cobertura de palta"></div>
-                <div class="gallery-item" data-src="DSC_4744.jpg"><img src="DSC_4744.jpg" alt="Corte preciso de un rollo de sushi"></div>
-                <div class="gallery-item" data-src="DSC_4750.jpg"><img src="DSC_4750.jpg" alt="Mano de chef sirviendo sushi"></div>
-                
-                <!-- GRUPO 4: NARANJA/AMARILLO (Sushi Proceso/Detalle) -->
-                <div class="gallery-item" data-src="DSC_4793.jpg"><img src="DSC_4793.jpg" alt="Sushi de palta y crema levantado con palillos"></div>
-                <div class="gallery-item" data-src="DSC_4806.jpg"><img src="DSC_4806.jpg" alt="Rollos de sushi gourmet con cebolla frita"></div>
-                <div class="gallery-item" data-src="DSC_4723.jpg"><img src="DSC_4723.jpg" alt="Chef colocando mango en un rollo de sushi"></div>
-                <div class="gallery-item" data-src="DSC_4662.jpg"><img src="DSC_4662.jpg" alt="Espolvoreando toppings verdes"></div>
-                <div class="gallery-item" data-src="DSC_4709.jpg"><img src="DSC_4709.jpg" alt="Primer plano de champiñones"></div>
-                
-                <!-- Fotos restantes -->
-                <div class="gallery-item" data-src="DSC_4674.jpg"><img src="DSC_4674.jpg" alt="Corte de aguacate en primer plano"></div>
-                <div class="gallery-item" data-src="cocina_sushi.jpg"><img src="cocina_sushi.jpg" alt="Proceso de armado de sushi en cocina"></div>
+                <!-- NOTA: Las clases `gallery-item-quarter` aseguran 1 columna en desktop y 2 en móvil, manteniendo el layout de 4 por fila. -->
                 
             </div>
             
