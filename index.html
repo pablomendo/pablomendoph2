@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PABLOMENDOPH - Fotografía de Producto Premium</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos personalizados para un diseño más elegante */
+        :root {
+            --primary-color: #38a169; /* Verde Oscuro elegante (para acentos y botón de arriba) */
+            --secondary-color: #f7fafc; /* Gris muy claro para fondo */
+            --dark-color: #1a202c; /* Texto oscuro */
+            --form-bg: #1c2128; /* Fondo de la caja del formulario (gris muy oscuro) */
+            --input-bg: #13171b; /* Fondo de los campos de texto: NEGRO OSCURO para que se vea oscuro */
+            --button-orange: #ff9900; /* Naranja/Amarillo (Solo para referencia) */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+        }
+        .header-bg {
+            background-color: var(--dark-color);
+        }
+        .text-primary-ph {
+            color: var(--primary-color);
+        }
+        .bg-primary-ph {
+            background-color: var(--primary-color);
+        }
+        .btn-ph {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .btn-ph:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            opacity: 0.9;
+        }
+        /* Galería de cuadrícula dinámica con efecto hover/zoom */
+        .gallery-grid {
+            display: grid;
+            gap: 1.5rem; /* Gap de 6 en Tailwind */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Estilos del Modal */
+        .modal {
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 50;
+        }
+        .modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navbar Fija -->
+    <header class="header-bg sticky top-0 z-40 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- LOGO: PABLOMENDO seguido de PH en color primario -->
+            <a href="#" class="text-2xl font-black text-white">PABLOMENDO<span class="text-primary-ph">PH</span></a>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#servicios" class="text-gray-300 hover:text-white transition duration-200">Servicios</a>
+                <a href="#galeria" class="text-gray-300 hover:text-white transition duration-200">Galería</a>
+                <a href="#contacto" class="text-primary-ph btn-ph bg-white px-4 py-2 rounded-lg hover:bg-gray-100">Contacto</a>
+            </nav>
+            <!-- Botón de menú móvil -->
+            <button id="menu-button" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-gray-900 shadow-md">
+            <a href="#servicios" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800">Servicios</a>
+            <a href="#galeria" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800">Galería</a>
+            <a href="#contacto" class="block px-4 py-3 text-sm text-primary-ph bg-gray-800/50 hover:bg-gray-800">Contacto</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Imagen de fondo que ocupa toda la pantalla -->
+        <img src="sushi-gourmet-flotante.jpg" onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/0d0d0d/ffffff?text=FOTOGRAF%C3%8DA+GASTRON%C3%93MICA';" alt="Sushi premium flotando en el aire" class="absolute inset-0 h-full w-full object-cover brightness-[.45]">
+        
+        <!-- Contenido del Hero -->
+        <div class="relative z-10 text-center p-6 bg-black/40 rounded-xl max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-4 animate-fadeIn">
+                La <span class="text-primary-ph">Imagen</span> que tu Cocina Merece
+            </h1>
+            <p class="text-xl text-gray-200 mb-8 font-light">
+                Elevamos tus platos a otro nivel. Destaca, sobresale y genera un vínculo mensual con tus clientes a través de fotografías que hablan por sí solos.
+            </p>
+            <a href="#servicios" class="btn-ph bg-primary-ph text-white text-lg font-semibold px-8 py-3 rounded-xl inline-block hover:bg-green-700">
+                Ver Cómo Podemos Ayudarte
+            </a>
+        </div>
+    </section>
+
+    <!-- Sección de Servicios (Propuesta de Valor) -->
+    <section id="servicios" class="py-20 md:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-12">Nuestra Propuesta de Valor</h2>
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Tarjeta 1: Destacar -->
+                <div class="p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border border-gray-100">
+                    <div class="text-primary-ph mb-4">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.275a4.4 4.4 0 010 6.096l-7.788 7.788a4.4 4.4 0 01-6.096 0L4 17.525M5.618 7.725L13.406 15.513"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Destaca y Sobresale</h3>
+                    <p class="text-gray-600">En un mercado saturado, la calidad de tu imagen es la clave. Olvídate de fotos aburridas; creamos visuales que detienen el scroll y abren el apetito.</p>
+                </div>
+                <!-- Tarjeta 2: Vínculo Mensual -->
+                <div class="p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border border-gray-100">
+                    <div class="text-primary-ph mb-4">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h8m-11 5h14m-12 5h10a2 2 0 002-2v-8a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Soporte Continuo</h3>
+                    <p class="text-gray-600">Ofrecemos packs mensuales adaptados a tus necesidades, asegurando que siempre tengas contenido fresco y de alta calidad para promociones y redes.</p>
+                </div>
+                <!-- Tarjeta 3: Calidad al Máximo Nivel -->
+                <div class="p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border border-gray-100">
+                    <div class="text-primary-ph mb-4">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Impacto Garantizado</h3>
+                    <p class="text-gray-600">Llevamos la imagen de tu cocina y platos a otro nivel, creando deseo y generando más tráfico y reservas para tu restaurante o bar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Galería Interactiva (Mosaico) -->
+    <section id="galeria" class="py-20 md:py-28 bg-secondary-color">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-4">Nuestra <span class="text-primary-ph">Galería</span></h2>
+            <p class="text-center text-xl text-gray-600 mb-12">El arte de capturar el sabor. Haz click en cualquier imagen para verla en detalle.</p>
+
+            <!-- Grid de Galería -->
+            <div id="photo-gallery" class="gallery-grid">
+                
+                <!-- GRUPO DE SUSHI -->
+                <div class="gallery-item" data-src="sushi-rolls-cebolla-frita.jpg"><img src="sushi-rolls-cebolla-frita.jpg" alt="Rollos de sushi gourmet con cebolla frita"></div>
+                <div class="gallery-item" data-src="sushi-gourmet-flotante.jpg"><img src="sushi-gourmet-flotante.jpg" alt="Sushi de palta y crema levantado con palillos"></div>
+                <div class="gallery-item" data-src="chef-preparando-sushi.jpg"><img src="chef-preparando-sushi.jpg" alt="Manos enguantadas preparando un rollo de sushi"></div>
+                <div class="gallery-item" data-src="preparacion-sushi-mango.jpg"><img src="preparacion-sushi-mango.jpg" alt="Chef colocando mango en un rollo de sushi"></div>
+                <div class="gallery-item" data-src="corte-rollo-sushi.jpg"><img src="corte-rollo-sushi.jpg" alt="Corte preciso de un rollo de sushi"></div>
+                <div class="gallery-item" data-src="servido-sushi-en-pizarra.jpg"><img src="servido-sushi-en-pizarra.jpg" alt="Mano de chef sirviendo un trozo de sushi en tabla de pizarra"></div>
+                <div class="gallery-item" data-src="sushi-aguacate-palta.jpg"><img src="sushi-aguacate-palta.jpg" alt="Cuatro piezas de sushi con cobertura de palta"></div>
+                <div class="gallery-item" data-src="chef-espolvoreando-toppings.jpg"><img src="chef-espolvoreando-toppings.jpg" alt="Espolvoreando toppings verdes sobre un rollo de sushi"></div>
+                <div class="gallery-item" data-src="primer-plano-champiñones.jpg"><img src="primer-plano-champiñones.jpg" alt="Primer plano de champiñones con fondo de cocina borroso"></div>
+                <div class="gallery-item" data-src="corte-aguacate-cocina.jpg"><img src="corte-aguacate-cocina.jpg" alt="Corte de aguacate en primer plano"></div>
+                
+                <!-- FOTO DE PACK DE JAMÓN CRUDO -->
+                <!-- Se ha revertido el nombre del archivo a jamon_pack.jpg y corregido el alt text. -->
+                <div class="gallery-item md:col-span-2" data-src="jamon_pack.jpg"><img src="jamon_pack.jpg" alt="Pack de jamón crudo, queso azul, pan y embutidos."></div>
+                
+                <!-- PLACEHOLDERS RESTANTES -->
+                <div class="gallery-item" data-src="https://placehold.co/800x600/1a202c/ffffff?text=Tu+Pr%C3%B3ximo+Plato"><img src="https://placehold.co/800x600/1a202c/ffffff?text=Tu+Pr%C3%B3ximo+Plato" alt="Placeholder para una foto de un nuevo plato"></div>
+                <div class="gallery-item" data-src="https://placehold.co/800x600/2f4f4f/ffffff?text=Impacto+Visual"><img src="https://placehold.co/800x600/2f4f4f/ffffff?text=Impacto+Visual" alt="Placeholder para una foto con impacto visual"></div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#contacto" class="btn-ph bg-primary-ph text-white text-lg font-semibold px-8 py-3 rounded-xl inline-block hover:bg-green-700">
+                    Trabajemos Juntos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto (Footer) -->
+    <footer id="contacto" class="header-bg py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+            <h2 class="text-4xl font-bold text-center mb-4">¿Listo para <span class="text-primary-ph">Transformar</span> tu Imagen?</h2>
+            <p class="text-center text-xl text-gray-400 mb-12">Contáctanos hoy mismo para coordinar tu primer pack mensual.</p>
+
+            <!-- CUADRO DE CONTACTO / FORMULARIO -->
+            <div class="flex justify-center mb-16">
+                <div class="bg-form-bg p-8 md:p-10 rounded-xl shadow-2xl w-full max-w-lg">
+                    <form action="#" method="POST" class="space-y-6">
+                        <!-- Campo: Nombre o Nombre del Local -->
+                        <div>
+                            <label for="nombre" class="block text-sm font-medium text-gray-300 mb-2">Tu Nombre o Nombre del Local</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Ej: Restaurante El Buen Gusto" required
+                                class="w-full p-3 rounded-lg bg-input-bg border-none text-gray-300 focus:ring-primary-ph focus:border-primary-ph placeholder-gray-500">
+                        </div>
+
+                        <!-- Campo: Email de Contacto -->
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email de Contacto</label>
+                            <input type="email" id="email" name="email" value="pablomendoph@gmail.com" required
+                                class="w-full p-3 rounded-lg bg-input-bg border-none text-gray-300 focus:ring-primary-ph focus:border-primary-ph placeholder-gray-500">
+                        </div>
+
+                        <!-- Campo: Proyecto / Descripción -->
+                        <div>
+                            <label for="proyecto" class="block text-sm font-medium text-gray-300 mb-2">
+                                Cuéntanos sobre tu proyecto (ej: "Tengo un bodegón y necesito fotos de la cocina y los platos")
+                            </label>
+                            <textarea id="proyecto" name="proyecto" rows="4" required
+                                class="w-full p-3 rounded-lg bg-input-bg border-none text-gray-300 focus:ring-primary-ph focus:border-primary-ph placeholder-gray-500 resize-none"></textarea>
+                        </div>
+
+                        <!-- Botón de Envío: VERDE PRIMARIO -->
+                        <button type="submit" class="btn-ph w-full bg-primary-ph text-white font-bold text-lg py-3 rounded-xl hover:bg-green-700 transition duration-300">
+                            Enviar Solicitud de Presupuesto
+                        </button>
+                    </form>
+                    
+                    <p class="text-center text-sm text-gray-400 mt-4">
+                        Te responderemos en menos de 24 horas.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- INFORMACIÓN DE CONTACTO (TELÉFONO Y EMAIL) -->
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 py-8 border-t border-gray-700">
+                <!-- Teléfono -->
+                <div class="flex items-center space-x-4">
+                    <div class="text-primary-ph">
+                        <!-- Icono de Teléfono -->
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold">Teléfono</p>
+                        <a href="tel:1157425925" class="text-gray-400 hover:text-white transition duration-200">11 5742 5925</a>
+                    </div>
+                </div>
+
+                <div class="text-gray-600 text-xl hidden md:block">|</div>
+
+                <!-- Email -->
+                <div class="flex items-center space-x-4">
+                    <div class="text-primary-ph">
+                        <!-- Icono de Email -->
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 9a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h10a2 2 0 012 2v10z"></path></svg>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold">Email</p>
+                        <a href="mailto:pablomendoph@gmail.com" class="text-gray-400 hover:text-white transition duration-200">pablomendoph@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center text-gray-500 mt-8 border-t border-gray-700 pt-8">
+                <p>&copy; 2025 PABLOMENDOPH. Todos los derechos reservados. | Diseño por [Tu Nombre/Marca]</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para visualización de imagen (Oculto por defecto) -->
+    <div id="image-modal" class="modal fixed inset-0 hidden items-center justify-center p-4">
+        <div class="modal-content relative flex items-center justify-center">
+            <!-- Botón de Cierre -->
+            <button id="close-modal" class="absolute top-4 right-4 text-white text-3xl font-bold opacity-75 hover:opacity-100 transition duration-200 focus:outline-none z-50" aria-label="Cerrar">
+                &times;
+            </button>
+            <img id="modal-image" src="" alt="Imagen ampliada de producto" class="max-w-full max-h-full rounded-xl shadow-2xl">
+        </div>
+    </div>
+
+    <!-- Script para interactividad (Galería y Menú Móvil) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const closeModalButton = document.getElementById('close-modal');
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // 1. Funcionalidad de la Galería (Modal)
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const imgSrc = item.getAttribute('data-src');
+                    modalImage.src = imgSrc;
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    document.body.style.overflow = 'hidden'; // Evita el scroll del fondo
+                });
+            });
+
+            // Función para cerrar el modal
+            const close_modal = () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                    document.body.style.overflow = ''; // Restaura el scroll
+            };
+
+            // Cierre por botón
+            closeModalButton.addEventListener('click', close_modal);
+
+            // Cierre al hacer click fuera de la imagen
+            modal.addEventListener('click', (e) => {
+                // Si el click fue en el contenedor del modal y no en la imagen
+                if (e.target === modal) {
+                    close_modal();
+                }
+            });
+
+            // Cierre por tecla ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    close_modal();
+                }
+            });
+
+            // 2. Funcionalidad del Menú Móvil
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Cierra el menú móvil al hacer click en un enlace
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
